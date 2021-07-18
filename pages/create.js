@@ -1,7 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
+import { useStateContext } from "../components/AnimeProvider";
 
 export default function CreateUser() {
+  const globalState = useStateContext();
+
   return (
     <div>
       <div className="create-user">
@@ -13,11 +16,16 @@ export default function CreateUser() {
         <div className="create-user__form">
           <img
             className="create-user__user-img"
-            src="https://uifaces.co/our-content/donated/vIqzOHXj.jpg"
+            src={globalState.defaultUserImg}
           />
           <div className="create-user__input-group">
             <label>Name</label>
-            <input type="text" className="create-user__inputText" />
+            <input
+              value={globalState.user}
+              onChange={globalState.createUserAction}
+              type="text"
+              className="create-user__inputText"
+            />
             <div className="create-user__colors">
               <div
                 className="create-user__color create-user__color--active"
