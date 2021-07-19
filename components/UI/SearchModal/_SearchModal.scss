@@ -11,6 +11,7 @@
   transition: opacity 0.4s ease-in-out;
   z-index: 13;
   overflow-x: scroll;
+  color: white;
 
   &--active {
     visibility: visible;
@@ -28,6 +29,7 @@
     border: none;
     border-bottom: 2px solid rgb(132, 0, 255);
     outline: none;
+    color: whitesmoke;
   }
   &__close-btn {
     position: absolute;
@@ -37,6 +39,7 @@
     padding: 15px;
     // background: red;
     cursor: pointer;
+    color: white;
   }
   &__title {
     font-size: 1.5rem;

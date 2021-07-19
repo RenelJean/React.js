@@ -1,10 +1,42 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useStateContext } from "../components/AnimeProvider";
+import ls from "local-storage";
+import { v4 } from "uuid";
+import useRouter from "next/router";
+import Router from "next/dist/next-server/server/router";
 
 export default function CreateUser() {
   const globalState = useStateContext();
+  const router = useRouter;
+  const saveUser = () => {
+    let users = [],
+      user;
 
+    if (ls("users") < 1) {
+      user = {
+        id: v4(),
+        user: globalState.user,
+        myListId: [],
+      };
+      users.push(user);
+      ls("users", users);
+      router.push("/login");
+
+      console.log("user: ", users);
+      console.log("lsusers", ls("users"));
+    } else {
+      users = ls("users");
+      user = {
+        id: v4(),
+        user: globalState.user,
+        myListId: [],
+      };
+      users.push(user);
+      ls("users", users);
+      router.push("/login");
+    }
+  };
   return (
     <div>
       <div className="create-user">
@@ -72,7 +104,9 @@ export default function CreateUser() {
         </div>
         <div className="create-user__buttons">
           <button className="create-user__cancel">Cancel</button>
-          <button className="create-user__save">Save</button>
+          <button className="create-user__save" onClick={saveUser}>
+            Save
+          </button>
         </div>
       </div>
     </div>
